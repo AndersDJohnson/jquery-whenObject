@@ -13,7 +13,10 @@ $.whenObject({
   first: firstPromise,
   second: secondPromise
 }) // => returns combined promise
-  .done(/* function... */)
+  .done(function (results) {
+    console.log(results.first);
+    console.log(results.second);
+  })
   .fail(/* function... */)
   .always(/* function... */)
 
