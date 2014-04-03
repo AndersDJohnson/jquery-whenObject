@@ -11,6 +11,8 @@
   }
 }(function ($) {
 
+  var slice = Array.prototype.slice;
+
   var arrayToObject = function (keys, results) {
     var object = {};
     $.each(results, function (index, value) {
@@ -29,11 +31,13 @@
       promises.push(value);
     });
     $.when.apply(null, promises)
-      .done(function (results) {
+      .done(function () {
+        var results = slice.call(arguments);
         var resultsObject = arrayToObject(keys, results);
         deferred.resolve(resultsObject);
       })
-      .fail(function (results) {
+      .fail(function () {
+        var results = slice.call(arguments);
         var resultsObject = arrayToObject(keys, results);
         deferred.reject(resultsObject);
       });
