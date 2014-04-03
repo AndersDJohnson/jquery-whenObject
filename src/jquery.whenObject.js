@@ -11,6 +11,15 @@
   }
 }(function ($) {
 
+  var arrayToObject = function (keys, results) {
+    var object = {};
+    $.each(results, function (index, value) {
+      var key = keys[index];
+      object[key] = value;
+    });
+    return object;
+  };
+
   var whenObject = function(object) {
     var deferred = new $.Deferred();
     var promises = [];
@@ -21,15 +30,12 @@
     });
     $.when.apply(null, promises)
       .done(function (results) {
-        var resultsObject = {};
-        $.each(results, function (index, value) {
-          var key = keys[index];
-          resultsObject[key] = value;
-        });
+        var resultsObject = arrayToObject(keys, results);
         deferred.resolve(resultsObject);
       })
       .fail(function (results) {
-        deferred.reject(results);
+        var resultsObject = arrayToObject(keys, results);
+        deferred.reject(resultsObject);
       });
     return deferred;
   };
