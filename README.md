@@ -1,7 +1,8 @@
 jquery-whenObject
 =================
 
-$.when with objects, a la [async](https://github.com/caolan/async).
+$.when with objects of promises, a la [async](https://github.com/caolan/async).
+Allows referring to results by key, while minimizing parameter mismatch errors.
 
 ## Usage
 
