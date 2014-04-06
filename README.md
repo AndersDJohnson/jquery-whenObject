@@ -4,6 +4,14 @@ jquery-whenObject
 $.when with objects of promises, a la [async](https://github.com/caolan/async).
 Allows referring to results by key, while minimizing parameter mismatch errors.
 
+## Install
+
+Via bower as `jquery-whenObject`.
+
+```sh
+bower install --save jquery-whenObject
+```
+
 ## Usage
 
 Include on your page, after jQuery. Supports AMD.
