@@ -22,6 +22,16 @@
     return object;
   };
 
+  /**
+   * normalize results as array for single promises
+   */
+  var normalizeResults = function (keys, results) {
+    if (keys.length === 1) {
+      results = [results];
+    }
+    return results;
+  };
+
   var whenObject = function(object) {
     var deferred = new $.Deferred();
     var promises = [];
@@ -30,14 +40,17 @@
       keys.push(key);
       promises.push(value);
     });
+
     $.when.apply(null, promises)
       .done(function () {
         var results = slice.call(arguments);
+        results = normalizeResults(keys, results);
         var resultsObject = arrayToObject(keys, results);
         deferred.resolve(resultsObject);
       })
       .fail(function () {
         var results = slice.call(arguments);
+        results = normalizeResults(keys, results);
         var resultsObject = arrayToObject(keys, results);
         deferred.reject(resultsObject);
       });
