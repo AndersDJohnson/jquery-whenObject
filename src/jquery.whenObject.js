@@ -54,6 +54,7 @@
         var resultsObject = arrayToObject(keys, results);
         deferred.reject(resultsObject);
       });
+
     return deferred;
   };
 
